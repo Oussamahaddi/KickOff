@@ -1,12 +1,12 @@
-import { ScrollView, Pressable, Text, Image, View, StyleSheet, ImageBackground } from 'react-native'
+import { Pressable, Text, Image, View, StyleSheet, ImageBackground, StatusBar } from 'react-native'
 import React from 'react'
 import {  RootStackParamListT } from '../types/Types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-type Props = NativeStackScreenProps<RootStackParamListT, 'Home'>
+type HomeScreenProps = NativeStackScreenProps<RootStackParamListT, 'Home'>
 
-const HomeScreen : React.FC<Props> = ({navigation}) => {
+const HomeScreen : React.FC<HomeScreenProps> = ({navigation}) => {
 
   return (
     <ImageBackground source={require('../assets/background.png')} resizeMode='stretch' style={styles.bg}>
@@ -14,7 +14,7 @@ const HomeScreen : React.FC<Props> = ({navigation}) => {
         <Image source={require('../assets/logo.png')}/>
         <Text>Find all matches you need here!</Text>
       </View>
-      <Pressable style={styles.btn} onPress={() => navigation.navigate('Tab', {screen : 'Favorite'})}>
+      <Pressable style={styles.btn} onPress={() => navigation.navigate('Tab')}>
         <Text style={styles.btn_text}>Next</Text>
         <Icon name="arrow-forward" color={'white'} size={25} />
       </Pressable>

@@ -2,14 +2,12 @@ import { NavigatorScreenParams } from "@react-navigation/native"
 
 export type RootStackParamListT = {
   Home : undefined
-  Tab : NavigatorScreenParams<RootTabParamListT>
-}
-export type RootDrawerParamListT = {
-  Matches : undefined
+  Tab : undefined
+  Favorites : undefined
 }
 export type RootTabParamListT = {
-  Draw : NavigatorScreenParams<RootDrawerParamListT>
-  Favorite : undefined
+  Matches : undefined
+  Players : undefined
 }
 
 export type InitialStateT = {
