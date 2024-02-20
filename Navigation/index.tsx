@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamListT } from '../types/Types';
 
 import TabNavigation from './TabNavigation';
+import HomeScreen from '../screens/HomeScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamListT>();
 
@@ -14,8 +15,13 @@ const Navigation = () => {
         initialRouteName='Home' 
         screenOptions={{statusBarColor: 'black',headerTintColor : "white", headerStyle: {backgroundColor: 'orange'}}}
       >
+        <Stack.Screen
+          name='Home'
+          component={HomeScreen}
+          options={{headerShown: false}}
+        />
         <Stack.Screen 
-          name='Home' 
+          name='Tab'
           component={TabNavigation} 
           options={{headerShown : false}} 
         />
