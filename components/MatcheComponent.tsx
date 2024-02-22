@@ -24,7 +24,7 @@ const MatcheComponent = ({matche} : {matche : Match}) => {
           <Text style={styles.text}>{matche.homeTeam.name}</Text>
         </View>
         <View style={styles.score}>
-          <Text style={{color : WHITE, fontSize : 25, backgroundColor : '#4d4d4d', borderRadius : 30, paddingRight : 10, paddingLeft : 10}}>0 - 0</Text>
+          <Text style={{color : WHITE, fontSize : 25, backgroundColor : '#4d4d4d', borderRadius : 30, paddingRight : 10, paddingLeft : 10}}>{matche.homeScore.display} - {matche.awayScore.display}</Text>
           <Image source={require('../assets/vs.png')} style={{width: 20, height : 20}}/>
         </View>
         <View style={{flex : 1, alignItems : 'center', gap: 10}}>
@@ -39,11 +39,11 @@ const MatcheComponent = ({matche} : {matche : Match}) => {
       <View style={styles.calendar}>
         <View style={{flexDirection : 'row', gap : 5}}>
           <Icon name='calendar' color={WHITE} size={20} />
-          <Text style={styles.text}>2020-10-20</Text>
+          <Text style={styles.text}>{`${new Date(matche.startTimestamp * 1000).toISOString().slice(0, 10)}`}</Text>
         </View>
         <View style={{flexDirection : 'row', gap : 5}}>
           <Icon name='time' color={WHITE} size={20} />
-          <Text style={styles.text}>2020-10-20</Text>
+          <Text style={styles.text}>{`${String(new Date(matche.time.currentPeriodStartTimestamp! * 1000).getHours()).padStart(2, '0')}:${String(new Date(matche.time.currentPeriodStartTimestamp! * 1000).getMinutes()).padStart(2, '0')}:${String(new Date(matche.time.currentPeriodStartTimestamp! * 1000).getSeconds()).padStart(2, '0')}`}</Text>
         </View>
       </View>
     </LinearGradient>

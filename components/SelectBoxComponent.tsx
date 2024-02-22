@@ -2,14 +2,18 @@ import { View, StyleSheet } from 'react-native'
 import React from 'react'
 import SelectDropdown from 'react-native-select-dropdown'
 import { BLACK, WHITE } from '../styles/Post'
+import { UniqueTournament } from '../types/matcheTypes'
+import { useAppDispatch } from '../hooks'
+import { filterByTournamentName } from '../features/Matches/matchesSlice'
 
-const data = ["All Matches", "Live Matches"]
+const SelectBoxComponent = ({tournaments} : {tournaments : UniqueTournament[]}) => {
 
-const SelectBoxComponent = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <View style={styles.container}>
       <SelectDropdown 
-        data={data} onSelect={(selectedItem) => console.log(selectedItem)}
+        data={tournaments.map(tournament => tournament.name)} onSelect={(selectedItem) => dispatch(filterByTournamentName(selectedItem))}
         buttonStyle={{backgroundColor: WHITE, width: '100%', borderRadius: 10}}
         defaultButtonText='Select Matches'
         dropdownStyle={{borderRadius : 10,}}

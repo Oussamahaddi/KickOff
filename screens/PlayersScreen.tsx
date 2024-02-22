@@ -21,11 +21,8 @@ const PlayersScreen : React.FC<PlayerScreenProps> = ({}) => {
   return (
     <ScrollView>
       <SearchComponent />
-      {
-        players.map((player, index) => (
-          <PlayerComponent player={player} />
-          ))
-        }
+      <PlayerComponent  />
+      <PlayerComponent  />
     </ScrollView>
   )
 }

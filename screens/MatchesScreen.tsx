@@ -25,7 +25,7 @@ const MatchesScreen : React.FC<MatchesScreenProps> = () => {
 
   return (
     <ScrollView>
-      <SelectBoxComponent />
+      <SelectBoxComponent tournaments={tournaments} />
       <View style={styles.title}>
         <Text style={{fontWeight : '600', fontSize : 20}}>All Matches</Text>
       </View>

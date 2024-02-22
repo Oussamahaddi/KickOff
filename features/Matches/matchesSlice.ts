@@ -3,13 +3,15 @@ import { Match, UniqueTournament } from "../../types/matcheTypes"
 import { fetchMatcheThunk } from "./matcheApi"
 
 interface InitialState {
-  matches : Match[],
+  matches : Match[]
+  matchesContainer : Match[]
   loading : boolean
 }
 
 const initialState : InitialState = {
   matches : [],
   loading : false,
+  matchesContainer : []
 }
 
 const matchesSlice = createSlice({
@@ -20,7 +22,7 @@ const matchesSlice = createSlice({
       state.matches = actions.payload
     },
     filterByTournamentName : (state, action : PayloadAction<string>) => {
-      state.matches = state.matches.filter(matche => matche.tournament.name === action.payload)
+        state.matches = state.matchesContainer.filter((matche) => matche.tournament.name.includes(action.payload))
     }
   },
   extraReducers : (builder) => {
@@ -30,8 +32,9 @@ const matchesSlice = createSlice({
     .addCase(fetchMatcheThunk.fulfilled, (state, action) => {
       state.loading = false,
       state.matches = action.payload
+      state.matchesContainer = action.payload
     })
-    .addCase(fetchMatcheThunk.rejected, (state) => {
+    .addCase(fetchMatcheThunk.rejected, (state, action) => {
       state.loading = false
     })
   }
