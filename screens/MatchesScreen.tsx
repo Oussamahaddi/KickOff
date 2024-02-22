@@ -1,9 +1,28 @@
 import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { RootTabParamListT } from '../types/Types'
+import { useAppDispatch, useAppSelector } from '../hooks'
+import { RootState } from '../store'
+import { fetchMatcheThunk } from '../features/Matches/matcheApi'
 import MatcheComponent from '../components/MatcheComponent'
 import SelectBoxComponent from '../components/SelectBoxComponent'
+import Loading from '../components/loading'
+import { fetchAllTournamentThunk } from '../features/Tournament/tournamentApi'
 
-const MatchesScreen = () => {
+type MatchesScreenProps = NativeStackScreenProps<RootTabParamListT, 'Matches'>
+
+const MatchesScreen : React.FC<MatchesScreenProps> = () => {
+
+  const { matches, loading } = useAppSelector((state : RootState) => state.matches);
+  const { tournaments } = useAppSelector((state : RootState) => state.tournaments);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMatcheThunk());
+    dispatch(fetchAllTournamentThunk());
+  }, [])
+
   return (
     <ScrollView>
       <SelectBoxComponent />
@@ -11,18 +30,14 @@ const MatchesScreen = () => {
         <Text style={{fontWeight : '600', fontSize : 20}}>All Matches</Text>
       </View>
       <View style={styles.matchContainer}>
-        <Pressable>
-          <MatcheComponent />
-        </Pressable>
-        <Pressable>
-          <MatcheComponent />
-        </Pressable>
-        <Pressable>
-          <MatcheComponent />
-        </Pressable>
-        <Pressable>
-          <MatcheComponent />
-        </Pressable>
+        {
+          loading ? <Loading visible={loading} /> : 
+          matches.map((matche, index) => (
+            <Pressable key={index}>
+              <MatcheComponent matche={matche} />
+            </Pressable>
+          ))
+        }
       </View>
     </ScrollView>
   )

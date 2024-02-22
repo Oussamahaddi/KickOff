@@ -3,7 +3,7 @@ import React from 'react'
 import { WHITE } from '../styles/Post'
 import { LinearGradient } from 'expo-linear-gradient'
 
-const PlayerComponent = () => {
+const PlayerComponent = ({}) => {
   return (
     <Pressable style={({pressed}) => [{backgroundColor : pressed ? "#c2c1c1" : WHITE}, styles.container]}>
       <Image source={require('../assets/flag.png')} style={styles.flag}/>
@@ -46,11 +46,10 @@ const styles = StyleSheet.create({
     shadowColor: "#3f02cc",
     shadowRadius: 20,
     elevation: 10,
-    borderTopEndRadius : 0,
-    borderTopStartRadius : 50,
-    borderBottomEndRadius : 50,
+    borderTopEndRadius : 150,
+    borderTopStartRadius : 0,
+    borderBottomEndRadius : 150,
     borderBottomStartRadius : 0,
-    transform : [{skewY : '2deg'}]
   },
   playerInfo : {
     flex : 2,

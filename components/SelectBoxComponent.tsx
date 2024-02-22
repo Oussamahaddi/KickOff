@@ -1,11 +1,9 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import React from 'react'
 import SelectDropdown from 'react-native-select-dropdown'
 import { BLACK, WHITE } from '../styles/Post'
 
-type SearchT = ['All Matches', 'Matche en Direct']
-
-const data : SearchT = ['All Matches', 'Matche en Direct']
+const data = ["All Matches", "Live Matches"]
 
 const SelectBoxComponent = () => {
   return (

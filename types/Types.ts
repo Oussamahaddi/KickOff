@@ -1,4 +1,6 @@
 import { NavigatorScreenParams } from "@react-navigation/native"
+import { Action } from "redux"
+import { ThunkDispatch } from "redux-thunk"
 
 export type RootStackParamListT = {
   Home : undefined
@@ -9,14 +11,3 @@ export type RootTabParamListT = {
   Matches : undefined
   Players : undefined
 }
-
-export type InitialStateT = {
-}
-
-export type ActionType<T, P> = {
-  type : T
-  payload : P
-}
-
-export type ActionTypesT = ActionType<"" | "", undefined> 
-  | ActionType<"" | '', unknown>

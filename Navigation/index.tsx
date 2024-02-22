@@ -6,16 +6,20 @@ import TabNavigation from './TabNavigation';
 import HomeScreen from '../screens/HomeScreen';
 import FavoriteScreen from '../screens/FavoriteScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
 const Stack = createNativeStackNavigator<RootStackParamListT>();
 
-const Navigation = ({navigation} : {navigation : RootStackParamListT}) => {
+const Navigation = () => {
 
   return (
     <NavigationContainer>
       <Stack.Navigator 
         initialRouteName='Home' 
-        screenOptions={{statusBarColor: BLACK, headerTintColor : WHITE, headerStyle: {backgroundColor: BLACK}}}
+        screenOptions={{
+          headerTintColor : WHITE, headerStyle: {backgroundColor: BLACK},
+          statusBarColor : BLACK,
+        }}
       >
         <Stack.Screen
           name='Home'
