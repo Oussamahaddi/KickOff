@@ -16,7 +16,7 @@ export default function Loading ({visible} : {visible : boolean}) {
 }
 const styles = StyleSheet.create({
   lottie: {
-    width: 100,
-    height: 100,
+    width: 70,
+    height: 70,
   },
 });
