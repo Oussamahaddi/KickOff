@@ -1,28 +1,28 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { Match, UniqueTournament } from "../../types/matcheTypes"
+import { Match, Tournament, UniqueTournament } from "../../types/matcheTypes"
 import { fetchMatcheThunk } from "./matcheApi"
 
 interface InitialState {
   matches : Match[]
-  matchesContainer : Match[]
   loading : boolean
+  uniqueTournament : UniqueTournament | null
 }
 
 const initialState : InitialState = {
   matches : [],
   loading : false,
-  matchesContainer : []
+  uniqueTournament : null
 }
 
 const matchesSlice = createSlice({
   name : 'matches',
   initialState,
   reducers : {
-    setMatches : (state, actions : PayloadAction<Match[]>) => {
-      state.matches = actions.payload
+    setTournament : (state, actions : PayloadAction<UniqueTournament>) => {
+      state.uniqueTournament = actions.payload
     },
-    filterByTournamentName : (state, action : PayloadAction<string>) => {
-        state.matches = state.matchesContainer.filter((matche) => matche.tournament.name.includes(action.payload))
+    resetFilter : (state, actions : PayloadAction<null>) => {
+      state.uniqueTournament = actions.payload
     }
   },
   extraReducers : (builder) => {
@@ -32,14 +32,18 @@ const matchesSlice = createSlice({
     .addCase(fetchMatcheThunk.fulfilled, (state, action) => {
       state.loading = false,
       state.matches = action.payload
-      state.matchesContainer = action.payload
     })
     .addCase(fetchMatcheThunk.rejected, (state, action) => {
       state.loading = false
+      console.log('something wrong');
+      
     })
   }
 })
 
-export const {setMatches, filterByTournamentName} = matchesSlice.actions
+export const { 
+  resetFilter,
+  setTournament
+} = matchesSlice.actions
 
 export default matchesSlice.reducer;

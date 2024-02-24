@@ -43,7 +43,7 @@ const MatcheComponent = ({matche} : {matche : Match}) => {
         </View>
         <View style={{flexDirection : 'row', gap : 5}}>
           <Icon name='time' color={WHITE} size={20} />
-          <Text style={styles.text}>{`${String(new Date(matche.time.currentPeriodStartTimestamp! * 1000).getHours()).padStart(2, '0')}:${String(new Date(matche.time.currentPeriodStartTimestamp! * 1000).getMinutes()).padStart(2, '0')}:${String(new Date(matche.time.currentPeriodStartTimestamp! * 1000).getSeconds()).padStart(2, '0')}`}</Text>
+          <Text style={styles.text}>{`${String(new Date(matche.startTimestamp! * 1000).getHours()).padStart(2, '0')}:${String(new Date(matche.startTimestamp! * 1000).getMinutes()).padStart(2, '0')}:${String(new Date(matche.startTimestamp! * 1000).getSeconds()).padStart(2, '0')}`}</Text>
         </View>
       </View>
     </LinearGradient>

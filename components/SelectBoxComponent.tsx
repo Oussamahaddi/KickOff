@@ -1,34 +1,69 @@
-import { View, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, StyleSheet, Text, Pressable } from 'react-native'
+import React, { useRef, useState } from 'react'
 import SelectDropdown from 'react-native-select-dropdown'
 import { BLACK, WHITE } from '../styles/Post'
-import { UniqueTournament } from '../types/matcheTypes'
+import {  UniqueTournament } from '../types/matcheTypes'
 import { useAppDispatch } from '../hooks'
-import { filterByTournamentName } from '../features/Matches/matchesSlice'
+import { resetFilter, setTournament } from '../features/Matches/matchesSlice'
 
-const SelectBoxComponent = ({tournaments} : {tournaments : UniqueTournament[]}) => {
+type Props = {
+  tournaments : UniqueTournament[]
+  uniqueTournament : UniqueTournament | null
+} 
 
-  const dispatch = useAppDispatch();
+const SelectBoxComponent = ({tournaments, uniqueTournament} : Props) => {
+
+  const dispatch = useAppDispatch(); 
+  const dropDownRef = useRef<SelectDropdown>(null)
+
+  const resetDropDown = () => {
+    dropDownRef.current?.reset();
+  }
 
   return (
     <View style={styles.container}>
-      <SelectDropdown 
-        data={tournaments.map(tournament => tournament.name)} onSelect={(selectedItem) => dispatch(filterByTournamentName(selectedItem))}
-        buttonStyle={{backgroundColor: WHITE, width: '100%', borderRadius: 10}}
+      <SelectDropdown
+        data={tournaments} onSelect={(selectedItem : UniqueTournament) => {
+          dispatch(setTournament(selectedItem))
+        }}
+        ref={dropDownRef}
+        buttonStyle={{backgroundColor: WHITE,flex: 2, borderRadius: 10}}
         defaultButtonText='Select Matches'
         dropdownStyle={{borderRadius : 10,}}
         selectedRowStyle={{backgroundColor: '#d5d5d5'}}
+        rowTextForSelection={(tournament : UniqueTournament) => tournament.name}
+        buttonTextAfterSelection={(tournament : UniqueTournament) => tournament.name}
       />
+      <Pressable 
+        disabled={uniqueTournament ? false : true} 
+        style={[styles.resetBtn, uniqueTournament ? {backgroundColor : WHITE} : {backgroundColor : '#a0a0a0'}]} 
+        onPress={() => {
+          resetDropDown();
+          dispatch(resetFilter(null))
+        }}
+      >
+        <Text style={{fontWeight: '500'}}>Reset</Text>
+      </Pressable>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container : {
+    flex: 1,
+    flexDirection: 'row',
+    gap : 10,
     backgroundColor : BLACK,
     paddingVertical : 30,
     paddingHorizontal : 20,
     width : '100%',
+  },
+  resetBtn : {
+    padding : 10,
+    borderRadius: 10,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   }
 })
 

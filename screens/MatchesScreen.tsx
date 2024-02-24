@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RootTabParamListT } from '../types/Types'
 import { useAppDispatch, useAppSelector } from '../hooks'
@@ -14,9 +14,14 @@ type MatchesScreenProps = NativeStackScreenProps<RootTabParamListT, 'Matches'>
 
 const MatchesScreen : React.FC<MatchesScreenProps> = () => {
 
-  const { matches, loading } = useAppSelector((state : RootState) => state.matches);
+  const { matches, loading, uniqueTournament: tournament } = useAppSelector((state : RootState) => state.matches);
   const { tournaments } = useAppSelector((state : RootState) => state.tournaments);
   const dispatch = useAppDispatch();
+
+  const filteredMatches = useMemo(() => {
+    if (!tournament) return matches;
+    return matches.filter(matche => matche.tournament.uniqueTournament.id === tournament.id);
+  }, [matches, tournament]);
 
   useEffect(() => {
     dispatch(fetchMatcheThunk());
@@ -25,14 +30,14 @@ const MatchesScreen : React.FC<MatchesScreenProps> = () => {
 
   return (
     <ScrollView>
-      <SelectBoxComponent tournaments={tournaments} />
+      <SelectBoxComponent tournaments={tournaments} uniqueTournament={tournament} />
       <View style={styles.title}>
         <Text style={{fontWeight : '600', fontSize : 20}}>All Matches</Text>
       </View>
       <View style={styles.matchContainer}>
         {
-          loading ? <Loading visible={loading} /> : 
-          matches.map((matche, index) => (
+          loading ? <Loading visible={loading} /> :
+          filteredMatches.map((matche, index) => (
             <Pressable key={index}>
               <MatcheComponent matche={matche} />
             </Pressable>
