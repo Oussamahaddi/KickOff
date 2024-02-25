@@ -6,12 +6,14 @@ interface InitialState {
   matches : Match[]
   loading : boolean
   uniqueTournament : UniqueTournament | null
+  favoriteMatches : Match[]
 }
 
 const initialState : InitialState = {
   matches : [],
   loading : false,
-  uniqueTournament : null
+  uniqueTournament : null,
+  favoriteMatches : []
 }
 
 const matchesSlice = createSlice({

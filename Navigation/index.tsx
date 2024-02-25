@@ -7,6 +7,8 @@ import HomeScreen from '../screens/HomeScreen';
 import FavoriteScreen from '../screens/FavoriteScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
+import MatcheDetailsScreen from '../screens/MatcheDetailsScreen';
+import PlayerDetailsScreen from '../screens/PlayerDetailsScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamListT>();
 
@@ -42,6 +44,14 @@ const Navigation = () => {
         <Stack.Screen 
           name='Favorites'
           component={FavoriteScreen} 
+        />
+        <Stack.Screen 
+          name='MatcheDetails'
+          component={MatcheDetailsScreen}
+        />
+        <Stack.Screen 
+          name='PlayerDetails'
+          component={PlayerDetailsScreen} 
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -12,7 +12,7 @@ import { fetchAllTournamentThunk } from '../features/Tournament/tournamentApi'
 
 type MatchesScreenProps = NativeStackScreenProps<RootTabParamListT, 'Matches'>
 
-const MatchesScreen : React.FC<MatchesScreenProps> = () => {
+const MatchesScreen : React.FC<MatchesScreenProps> = ({navigation}) => {
 
   const { matches, loading, uniqueTournament: tournament } = useAppSelector((state : RootState) => state.matches);
   const { tournaments } = useAppSelector((state : RootState) => state.tournaments);
@@ -38,7 +38,7 @@ const MatchesScreen : React.FC<MatchesScreenProps> = () => {
         {
           loading ? <Loading visible={loading} /> :
           filteredMatches.map((matche, index) => (
-            <Pressable key={index}>
+            <Pressable key={index} onPress={() => navigation.navigate('MatcheDetails', {matche})}>
               <MatcheComponent matche={matche} />
             </Pressable>
           ))

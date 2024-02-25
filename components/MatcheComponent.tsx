@@ -4,6 +4,8 @@ import { BLACK, WHITE } from '../styles/Post'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Match } from '../types/matcheTypes'
+import TeamComponent from './TeamComponent'
+
 
 const MatcheComponent = ({matche} : {matche : Match}) => {
   return (

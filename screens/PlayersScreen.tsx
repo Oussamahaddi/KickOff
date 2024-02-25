@@ -29,8 +29,8 @@ const PlayersScreen : React.FC<PlayerScreenProps> = ({}) => {
       <SearchComponent name={playerName} />
       {
         loading ? <Loading visible={loading}/> :
-        searchPlayer.map((player, index) => (
-          <PlayerComponent key={index} player={player} />
+        searchPlayer.map(player => (
+          <PlayerComponent key={player.id} player={player} />
         ))
       }
     </ScrollView>
