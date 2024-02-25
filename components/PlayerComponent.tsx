@@ -9,7 +9,7 @@ type Props = {
 
 const PlayerComponent = ({player} : Props) => {
   return (
-    <Pressable style={({pressed}) => [{backgroundColor : pressed ? "#c2c1c1" : WHITE}, styles.container]}>
+    <>
       <Image source={{uri: player.team_picture}} style={styles.flag}/>
       <View style={styles.playerInfo}>
         <Text style={styles.playerName}>{player.player_name}</Text>
@@ -38,29 +38,11 @@ const PlayerComponent = ({player} : Props) => {
       <View style={styles.playerPicture}>
         <Image source={{uri : player.player_picture}} style={{width : 100, aspectRatio : 1}}/>
       </View>
-    </Pressable>
+    </>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection : 'row',
-    alignItems: 'center',
-    padding : 20,
-    width : '90%',
-    marginTop: 20,
-    marginLeft : 'auto',
-    marginRight: 'auto',
-    borderRadius : 20,
-    shadowColor: "#3f02cc",
-    shadowRadius: 20,
-    elevation: 10,
-    borderTopEndRadius : 150,
-    borderTopStartRadius : 0,
-    borderBottomEndRadius : 150,
-    borderBottomStartRadius : 0,
-  },
   playerInfo : {
     flex : 2,
     gap : 10,

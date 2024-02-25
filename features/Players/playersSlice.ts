@@ -26,7 +26,6 @@ const playersSlice = createSlice({
     builder.addCase(fetchAllPlayersThunk.pending, (state, action) => {
       state.loading = true
     }).addCase(fetchAllPlayersThunk.fulfilled, (state, action) => {
-      console.log('accepted');
       state.loading = false
       state.players = action.payload
     }).addCase(fetchAllPlayersThunk.rejected, (state, action) => {
