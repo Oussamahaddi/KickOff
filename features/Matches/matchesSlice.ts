@@ -25,6 +25,12 @@ const matchesSlice = createSlice({
     },
     resetFilter : (state, actions : PayloadAction<null>) => {
       state.uniqueTournament = actions.payload
+    },
+    likeMatche : (state, actions : PayloadAction<Match>) => {
+      state.favoriteMatches = [...state.favoriteMatches, actions.payload]
+    },
+    disLikeMatche : (state, actions : PayloadAction<Match>) => {
+      state.favoriteMatches = state.favoriteMatches.filter(matche => matche.id !== actions.payload.id)
     }
   },
   extraReducers : (builder) => {
@@ -45,7 +51,9 @@ const matchesSlice = createSlice({
 
 export const { 
   resetFilter,
-  setTournament
+  setTournament,
+  disLikeMatche,
+  likeMatche
 } = matchesSlice.actions
 
 export default matchesSlice.reducer;

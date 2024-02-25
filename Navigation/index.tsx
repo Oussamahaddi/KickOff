@@ -9,10 +9,15 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 import MatcheDetailsScreen from '../screens/MatcheDetailsScreen';
 import PlayerDetailsScreen from '../screens/PlayerDetailsScreen';
+import LikedAlert from '../components/LikedAlert';
+import { useAppSelector } from '../hooks';
+import { disLikeMatche, likeMatche } from '../features/Matches/matchesSlice';
 
 const Stack = createNativeStackNavigator<RootStackParamListT>();
 
 const Navigation = () => {
+
+  const {favoriteMatches} = useAppSelector(state => state.matches)
 
   return (
     <NavigationContainer>
@@ -48,6 +53,23 @@ const Navigation = () => {
         <Stack.Screen 
           name='MatcheDetails'
           component={MatcheDetailsScreen}
+          options={({route}) => ({
+            headerRight : () => (
+              favoriteMatches.includes(route.params.matche) ?
+              <LikedAlert 
+                title='Matche removed from Favorites' 
+                description='You have remove this matche from favorites. is no more disponible!' 
+                icon='trash' 
+                dispatchMethod={disLikeMatche(route.params.matche)} 
+              /> :
+              <LikedAlert 
+                title='Matche Add to Favorites' 
+                description='Now you can find your matche liked on favorites' 
+                icon='heart' 
+                dispatchMethod={likeMatche(route.params.matche)} 
+              />
+            )
+          })}
         />
         <Stack.Screen 
           name='PlayerDetails'
