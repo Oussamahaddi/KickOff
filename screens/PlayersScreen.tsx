@@ -30,8 +30,8 @@ const PlayersScreen : React.FC<PlayerScreenProps> = ({navigation}) => {
       <SearchComponent name={playerName} />
       {
         loading ? <Loading visible={loading}/> :
-        searchPlayer.map(player => (
-          <Pressable style={({pressed}) => [
+        searchPlayer.map((player, index) => (
+          <Pressable key={index} style={({pressed}) => [
             {backgroundColor : pressed ? "#c2c1c1" : WHITE}, 
             styles.container]}
             onPress={() => navigation.navigate("PlayerDetails", {player})}
